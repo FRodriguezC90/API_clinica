@@ -71,6 +71,15 @@ def agregar_medico():
 
     return jsonify(medicos)
 
+# Borrar medico
+@app.route('/medicos/<int:id>',methods =['DELETE'])
+def borrar_medico(id):
+    for indice, medico in enumerate(medicos):
+        if medico.get("id") == id:
+            del medicos[indice]
+    
+    return jsonify(medicos)
+
 
 
 
