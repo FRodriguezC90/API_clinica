@@ -16,38 +16,25 @@ class Menu:
         4) Editar un profesional.-               
         5) Elimine un profesional.-               
         ''')
-        op = input("""
-        =========================================
-        ==========Seleccione un Número===========
-        =========================================\n----->       
-        """).capitalize()        
+        op = input("""=======Seleccione un Número=====\n""").capitalize()        
         limpiarpantalla()      
         if op == '1':           
-            print("Muestre a todos los profesionales")
+            print("Muestre a todos los profesionales...")
             Apimed.mostrar_profesionales()
-            input("""
-            ==============================================
-            ========Presiona una tecla para continuar=====
-            ==============================================
-            """)
+            input("""Presiona una tecla para continuar""")
             limpiarpantalla()
             Menu.__init__()
         
         elif op == '2':
             id = int(input("Ingrese el id del profesional\n"))
             limpiarpantalla()
-            print("""        
-            =============PRODUCTO SELECCIONADO============
-            """)
+            input("""Mostrar un profesional...""")
             Apimed.mostrar_profesional(id)
-            input("""
-            ==============================================
-            ========Presiona una tecla para continuar=====
-            ==============================================
-            """)
+            input("""Presiona una tecla para continuar""")
             limpiarpantalla()
             Menu.__init__()
         elif op == '3':
+            input("""Crear un nuevo profesional...""")
             id = int(input("Ingrese el id del nuevo profesional:\n"))
             Especialidad = input("Ingrese la especialidad del profesional:\n")
             Nombre = input("Ingrese el nombre del profesional:\n")
@@ -56,19 +43,14 @@ class Menu:
             data = {'id': id, "Especialidad": Especialidad, "Nombre": Nombre, "Egresado": Egresado, "Edad": Edad}
             json_data = json.dumps(data)
             limpiarpantalla()            
-            print("""
-            ==============Profesional añadido correctamente===========
-            """)
+            input("""Profesional Añadido correctamente""")
             print(json_data)
             Apimed.registrar_especialista(json_data)
-            input("""
-            ==============================================
-            ========Presiona una tecla para continuar=====
-            ==============================================
-            """)
+            input("""Presiona una tecla para continuar""")
             limpiarpantalla()
             Menu.__init__()           
         elif op == '4':
+            input("""Editar un profesional...""")
             id = int(input("Ingrese el id del profesional que desea modificar:\n"))
             Apimed.mostrar_profesionales(id)
             Especialidad = input("Ingrese la nueva especialidad del profesional:\n")
@@ -78,29 +60,19 @@ class Menu:
             data = {'id': id, "Especialidad": Especialidad, "Nombre": Nombre, "Egresado": Egresado, "Edad": Edad}
             json_data = json.dumps(data)
             limpiarpantalla()
-            print("""
-            ==================PRODUCTO MODIFICADO======================
-            """)
+            input("""Profesional modificado!""")
             Apimed.actualizar_especialista(id, json_data)
-            input("""
-            ==============================================
-            ========PRESIONE ENTER PARA CONTINUAR!========
-            ==============================================
-            """)
+            input("""Presiona una tecla para continuar""")
             limpiarpantalla()
             Menu.__init__()           
         elif op == '5':
+            input("""Eliminar un profesional...""")
             id = int(input("Ingrese el id del profesional que desea eliminar"))
             Apimed.eliminar_especialista(id)
             limpiarpantalla()
             Menu.__init__()
         else:
-            input("""
-            ==============================================
-            ==============Intentelo denuevo.==============
-            ==============================================\n\n
-            presione Enter\n----->
-            """)
+            input("""Intentelo denuevo""")
             limpiarpantalla()            
             pass
 Menu.__init__()

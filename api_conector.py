@@ -1,77 +1,70 @@
 import requests
-# from flask import Flask, jsonify, request
-# import json
+import app
 
-
-
-class Api():
+class Apimed():
     
     
     def __init__(self, url):
         self.url = url        
     
-    def mostrar_productos():
-        url = "http://localhost:5000/productos"
+    def mostrar_profesionales():
+        url = "http://localhost:5000/medicos"
+        r = requests.get(url)
         try:
-            response = requests.get(url)
-            # Para mostrar conexion = print(response)
-            # Para mostrar en formato json = response = response.json()            
-            print(response.text)        
-            #print(response.status_code)
+            r.status_code == 200
+            data = r.json()     
+            print(data)
+            print("¡Profesionales mostrados con Exito!")        
         except:
-            print("Error, no se puede mostrar productos en este momento!")
+            print("Error en la conexión, no se pueden mostrar profesionales!")
 
-    def mostrar_producto(id):
-        url = f"http://localhost:5000/productos/{id}"   
+    def mostrar_profesional(id):
+        url = f"http://localhost:5000/medicos/{id}"
+        r = requests.get(url)   
         try:            
-            response = requests.get(url)
-            # Para mostrar en formato json = response = response.json()            
-            print(response.text)
+            r.status_code == 200
+            data = r.json()     
+            print(data)
+            print("¡Profesional mostrado con Exito!")
         except:
-            print('Error al intentar mostrar los datos')  
+            print("Error en la conexión, no se puede mostrar el profesional!")  
 
-    def crear_producto(json_data):    
+    def registrar_especialista(json_data):    
         
         headers = {'Content-Type': 'application/json'}                
-        url = "http://localhost:5000/productos"
+        url = "http://localhost:5000/medicos"
+        r = requests.post(url, data=json_data, headers=headers)
         try:
-            response = requests.post(url, data=json_data, headers=headers)
-            # Para mostrar en formato json = response = response.json()        
-            print(response.text)
-            print('Los datos del producto que seleccionaste fueron ingresados correctamente')
+            r.status_code == 200
+            data = r.json()     
+            print(data)
+            print("¡Profesional creado con Exito!")  
         except:
-            print('Error, no se pudo crear el nuevo producto')        
+            print('Error en la conexión, no se puede crear el profesional!')        
 
-    def actualizar_producto(id, json_data):
+    def actualizar_especialista(id, json_data):
         headers = {'Content-Type': 'application/json'}
-        url= f"http://localhost:5000/productos/{id}"
-        
-            
+        url= f"http://localhost:5000/medicos/{id}"
+        r = requests.put(url, data=json_data, headers = headers)
         try:
-            response = requests.put(url, data=json_data, headers = headers)
-            # Para mostrar en formato json = response = response.json()
-            print(response.text)
-            response.status_code == 200
-            print('Los datos del producto que seleccionaste fueron actualizados correctamente')
+            r.status_code == 200
+            data = r.json()     
+            print(data)
+            print("Datos del profesional actualizados")  
         except:
             print('Error al actualizar los datos')
 
-    def eliminar_producto(id):
+    def eliminar_especialista(id):
 
-        url= f"http://localhost:5000/productos/{id}"      
-
+        url= f"http://localhost:5000/medicos/{id}"
+        r = requests.delete(url)      
         try:
-            response = requests.delete(url)
-            response.status_code == 204
-            print('Los datos del producto que seleccionaste fueron eliminados correctamente')
+            r.status_code == 200
+            data = r.json()     
+            print(data)
+            print("¡Profesional eliminado con Exito!")  
         except:
             print('Error al eliminar los datos')
-
-        
-
-
-url = "http://localhost:5000/productos"
-obj = Api(url)
 
     
 
