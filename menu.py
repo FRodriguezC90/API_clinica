@@ -1,4 +1,4 @@
-from api_conector import Api
+from api_conector import Apimed
 import json
 
 
@@ -9,85 +9,79 @@ def limpiarpantalla():
 class Menu:
     def __init__():
         print('''
-        ====================MENU=================
-        = a) Mostrar los productos disponibles  =
-        = b) Mostrar un producto en especifico  =
-        = c) Crear un nuevo producto            =
-        = d) Editar un producto                 =
-        = e) Eliminar un producto               =
-        =========================================
-        =========================================
-        =    Para salir del programa presione   =
-        =        cualquier tecla !!!            =
-        =========================================
+        ================BIENVENIDO==============
+        1) Muestre a todos los profesionales.-
+        2) Mostrar un profesional.-
+        3) Crear un nuevo profesional.-         
+        4) Editar un profesional.-               
+        5) Elimine un profesional.-               
         ''')
         op = input("""
         =========================================
-        ==========Ingrese una opcion=============
+        ==========Seleccione un Número===========
         =========================================\n----->       
         """).capitalize()        
         limpiarpantalla()      
-        if op == 'A':           
-            print("===============TODOS LOS PRODUCTOS===============")
-            Api.mostrar_productos()
+        if op == '1':           
+            print("Muestre a todos los profesionales")
+            Apimed.mostrar_profesionales()
             input("""
             ==============================================
-            ========PRESIONE ENTER PARA CONTINUAR!========
+            ========Presiona una tecla para continuar=====
             ==============================================
             """)
             limpiarpantalla()
             Menu.__init__()
         
-        elif op == 'B':
-            id = int(input("Ingrese el id del producto que desea mostrar (Ej: 1, 2, 3, 4, 5, 6, 7, 8...):\n---->"))
+        elif op == '2':
+            id = int(input("Ingrese el id del profesional\n"))
             limpiarpantalla()
             print("""        
             =============PRODUCTO SELECCIONADO============
             """)
-            Api.mostrar_producto(id)
+            Apimed.mostrar_profesional(id)
             input("""
             ==============================================
-            ========PRESIONE ENTER PARA CONTINUAR!========
+            ========Presiona una tecla para continuar=====
             ==============================================
             """)
             limpiarpantalla()
             Menu.__init__()
-        elif op == 'C':
-            id = int(input("Ingrese el id del nuevo producto (Ej: 10, 11, 12, 13, 14...):\n----->"))
-            nombre = input("Ingrese el nombre del nuevo producto:\n----->")
-            descripcion = input("Ingrese una descripción para el nuevo producto:\n----->")
-            valor = int(input("Ingrese un valor para el nuevo producto:\n----->"))
-            data = {'id': id, 'nombre': nombre, 'descripcion': descripcion, 'valor': valor}
+        elif op == '3':
+            id = int(input("Ingrese el id del nuevo profesional:\n"))
+            Especialidad = input("Ingrese la especialidad del profesional:\n")
+            Nombre = input("Ingrese el nombre del profesional:\n")
+            Egresado = input("Ingrese lugar de egreso del profesional:\n")
+            Edad = int(input("Ingrese Edad de Profesional:\n"))
+            data = {'id': id, "Especialidad": Especialidad, "Nombre": Nombre, "Egresado": Egresado, "Edad": Edad}
             json_data = json.dumps(data)
             limpiarpantalla()            
             print("""
-            ====================PRODUCTO CREADO========================
+            ==============Profesional añadido correctamente===========
             """)
             print(json_data)
-            input("""
-            ===========PRESIONE ENTER PARA VER LA NUEVA LISTA==========
-            """)
-            Api.crear_producto(json_data)
+            Apimed.registrar_especialista(json_data)
             input("""
             ==============================================
-            ========PRESIONE ENTER PARA CONTINUAR!========
+            ========Presiona una tecla para continuar=====
             ==============================================
             """)
             limpiarpantalla()
             Menu.__init__()           
-        elif op == 'D':
-            id = int(input("Ingrese el id del producto que desea modificar (1, 2, 3, 4, 5, 6...):\n----->"))
-            Api.mostrar_producto(id)
-            nombre = input("Ingrese el nuevo nombre o mantenga el anterior:\n----->")
-            descripcion = input("Ingrese nueva descripción o mantenga la anterior:\n----->")
-            valor = int(input("Ingrese un nuevo valor o mantenga el anterior:\n----->"))            
-            data = {'id': id, 'nombre': nombre, 'descripcion': descripcion, 'valor': valor}
+        elif op == '4':
+            id = int(input("Ingrese el id del profesional que desea modificar:\n"))
+            Apimed.mostrar_profesionales(id)
+            Especialidad = input("Ingrese la nueva especialidad del profesional:\n")
+            Nombre = input("Ingrese el nuevo nombre del profesional:\n")
+            Egresado = input("Ingrese nuevo lugar de egreso del profesional:\n")
+            Edad = int(input("Ingrese la nueva edad de Profesional:\n"))
+            data = {'id': id, "Especialidad": Especialidad, "Nombre": Nombre, "Egresado": Egresado, "Edad": Edad}
             json_data = json.dumps(data)
             limpiarpantalla()
             print("""
             ==================PRODUCTO MODIFICADO======================
             """)
-            Api.actualizar_producto(id, json_data)
+            Apimed.actualizar_especialista(id, json_data)
             input("""
             ==============================================
             ========PRESIONE ENTER PARA CONTINUAR!========
@@ -95,21 +89,15 @@ class Menu:
             """)
             limpiarpantalla()
             Menu.__init__()           
-        elif op == 'E':
-            id = int(input("Ingrese el id del producto que quiere eliminar (1, 2, 3, 4, 5, 6, 7, 8.....):\n----->"))
-            Api.eliminar_producto(id)
-            Api.mostrar_productos()
-            input("""
-            ==============================================
-            ========PRESIONE ENTER PARA CONTINUAR!========
-            ==============================================
-            """)
+        elif op == '5':
+            id = int(input("Ingrese el id del profesional que desea eliminar"))
+            Apimed.eliminar_especialista(id)
             limpiarpantalla()
             Menu.__init__()
         else:
             input("""
             ==============================================
-            ====================ADIOS!====================
+            ==============Intentelo denuevo.==============
             ==============================================\n\n
             presione Enter\n----->
             """)
